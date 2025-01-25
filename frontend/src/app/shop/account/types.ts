@@ -1,6 +1,6 @@
 import { FormControlProps } from '@/components/common/form/formConfig';
 
-export type FormData = Record<string, string>;
+export type FormData = Record<string, string | null>;
 
 export type FormProps = {
 	buttonText: string;

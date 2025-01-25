@@ -36,7 +36,7 @@ const initialFormData = {
 
 function AdminProducts() {
 	const [openCreateProductDialog, setOpenCreateProductDialog] = useState(false);
-	const [formData, setFormData] = useState<FormData>(initialFormData);
+	const [formData, setFormData] = useState<FormData | null>(initialFormData);
 	const [imageFile, setImageFile] = useState<File | null>(null);
 	const [uploadedImage, setUploadedImage] = useState<string>('');
 	const [imageLoadingState, setImageLoadingState] = useState<boolean>(false);
@@ -51,14 +51,17 @@ function AdminProducts() {
 
 	function updateProduct() {
 		if (currentEditedId)
-			dispatch(editProduct({ _id: currentEditedId, formData })).then((data) => {
-				if (data?.payload?.success) {
-					dispatch(fetchAllProducts());
-					setFormData(initialFormData);
-					setOpenCreateProductDialog(false);
-					setCurrentEditedId(null);
-				}
-			});
+			if (formData)
+				dispatch(editProduct({ _id: currentEditedId, formData })).then(
+					(data) => {
+						if (data?.payload?.success) {
+							dispatch(fetchAllProducts());
+							setFormData(initialFormData);
+							setOpenCreateProductDialog(false);
+							setCurrentEditedId(null);
+						}
+					}
+				);
 	}
 
 	function handleDeleteProduct(getCurrentProductId: string): void {
@@ -107,9 +110,10 @@ function AdminProducts() {
 	}
 
 	function isFormValid() {
-		return Object.keys(formData)
-			.map((key) => formData[key] !== '')
-			.every((item) => item);
+		if (formData)
+			return Object.keys(formData)
+				.map((key) => formData[key] !== '')
+				.every((item) => item);
 	}
 
 	useEffect(() => {
@@ -125,7 +129,7 @@ function AdminProducts() {
 			</div>
 			{productList.length > 0 ? (
 				<div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-					{productList.map((product: FormData) => {
+					{productList.map((product: Record<string, string>) => {
 						return (
 							<div key={product.title}>
 								<AdminProductTile

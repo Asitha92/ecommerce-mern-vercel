@@ -29,7 +29,9 @@ function Address({ handleCurrentAddress, selectedAddressId }: AddressProps) {
 	const { user } = useSelector((state: RootState) => state.auth);
 	const { addressList } = useSelector((state: RootState) => state.shopAddress);
 
-	const [formData, setFormData] = useState<FormData>(initialAddressFormData);
+	const [formData, setFormData] = useState<FormData | null>(
+		initialAddressFormData
+	);
 	const [currentEditedAddressId, setCurrentEditedAddressId] = useState<
 		string | null
 	>(null);
@@ -52,7 +54,7 @@ function Address({ handleCurrentAddress, selectedAddressId }: AddressProps) {
 		}
 
 		if (currentEditedAddressId !== null) {
-			if (user?.id)
+			if (user?.id && formData)
 				dispatch(
 					editAddress({
 						userId: user?.id,
@@ -87,7 +89,9 @@ function Address({ handleCurrentAddress, selectedAddressId }: AddressProps) {
 	};
 
 	function isFormValid() {
-		return Object.values(formData).every((value) => value?.trim() !== '');
+		return (
+			formData && Object.values(formData).every((value) => value?.trim() !== '')
+		);
 	}
 	function handleEditAddress(addressInfo: FormData) {
 		setCurrentEditedAddressId(addressInfo._id);
@@ -104,7 +108,7 @@ function Address({ handleCurrentAddress, selectedAddressId }: AddressProps) {
 	function handleDeleteAddress(addressInfo: FormData) {
 		if (user?.id)
 			dispatch(
-				deleteAddress({ userId: user?.id, addressId: addressInfo._id })
+				deleteAddress({ userId: user?.id, addressId: addressInfo._id || '' })
 			).then((data) => {
 				if (data?.payload?.success) {
 					dispatch(fetchAllAddresses(user?.id));

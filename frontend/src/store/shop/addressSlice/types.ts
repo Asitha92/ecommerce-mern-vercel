@@ -1,7 +1,7 @@
 export type EditAddressParams = {
 	userId: string;
 	addressId: string;
-	formData: Record<string, string>;
+	formData: Record<string, string | null>;
 };
 
 export type DeleteAddressParams = {
