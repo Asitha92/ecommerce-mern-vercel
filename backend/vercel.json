@@ -2,18 +2,46 @@
 	"version": 2,
 	"builds": [
 		{
-			"src": "server.js",
+			"src": "next.config.js",
+			"use": "@vercel/next"
+		},
+		{
+			"src": "api/**/*.js",
 			"use": "@vercel/node"
 		}
 	],
-	"routes": [
+	"rewrites": [
 		{
-			"src": "/(.*)",
-			"dest": "server.js",
-			"methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-			"headers": {
-				"Access-Control-Allow-Origin": "*"
-			}
+			"source": "/api/:path*",
+			"destination": "/api/:path*"
 		}
-	]
+	],
+	"redirects": [
+		{
+			"source": "/old-route",
+			"destination": "/new-route",
+			"permanent": true
+		}
+	],
+	"headers": [
+		{
+			"source": "/static/(.*)",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "public, max-age=31536000, immutable"
+				}
+			]
+		}
+	],
+	"env": {
+		"NEXT_PUBLIC_API_BASE_URL": "https://ecommerce-mern-vercel-self.vercel.app",
+		"NODE_ENV": "production"
+	},
+	"functions": {
+		"api/**/*.js": {
+			"memory": 128,
+			"maxDuration": 10
+		}
+	}
 }
