@@ -11,7 +11,7 @@ const handleImageUpload = async (req, res) => {
 
 		res.json({
 			success: true,
-			message: 'Image uploaded successfully',
+			message: 'Image uploaded successfully !',
 			result,
 		});
 	} catch (err) {
