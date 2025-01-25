@@ -29,7 +29,7 @@ mongoose
 // Body parsing middleware
 app.use(
 	cors({
-		origin: process.env.CLIENT_BASE_URL,
+		origin: '*',
 		methods: ['GET', 'POST', 'DELETE', 'PUT'],
 		allowedHeaders: [
 			'Content-Type',
