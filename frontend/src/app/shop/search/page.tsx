@@ -52,7 +52,7 @@ function SearchProducts() {
 	}, [keyword, router, searchParams, dispatch]);
 
 	function handleAddToCart(getCurrentProductId: string, getTotalStock: string) {
-		let getCartItems = cart?.items || [];
+		const getCartItems = cart?.items || [];
 
 		if (getCartItems.length) {
 			const indexOfCurrentItem = getCartItems.findIndex(
@@ -79,7 +79,7 @@ function SearchProducts() {
 			})
 		).then((data) => {
 			if (data?.payload?.success) {
-				user?.id && dispatch(fetchCartItems(user?.id));
+				if (user?.id) dispatch(fetchCartItems(user?.id));
 				toast({
 					title: 'Product is added to cart',
 				});
