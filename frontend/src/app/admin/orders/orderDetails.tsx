@@ -20,17 +20,19 @@ const initialFormData: FormData = {
 };
 
 function AdminOrderDetails({ orderDetails }: OrderDetailsProps) {
-	const [formData, setFormData] = useState<FormData>(initialFormData);
+	const [formData, setFormData] = useState<FormData | null>(initialFormData);
 	const { user } = useSelector((state: RootState) => state.auth);
 	const dispatch = useDispatch<AppDispatch>();
 	const { toast } = useToast();
 
 	function handleUpdateStatus(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const { status } = formData;
 		if (orderDetails?._id) {
 			dispatch(
-				updateOrderStatus({ id: orderDetails?._id, orderStatus: status })
+				updateOrderStatus({
+					id: orderDetails?._id,
+					orderStatus: formData?.status || '',
+				})
 			).then((data) => {
 				if (data?.payload?.success) {
 					dispatch(getOrderDetailsForAdmin(orderDetails?._id));

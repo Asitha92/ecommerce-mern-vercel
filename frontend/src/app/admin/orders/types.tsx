@@ -1,4 +1,4 @@
-export type FormData = Record<string, string>;
+export type FormData = Record<string, string | null>;
 
 export type OrderItem = {
 	_id: string;
