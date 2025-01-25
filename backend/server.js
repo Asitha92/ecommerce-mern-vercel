@@ -39,6 +39,7 @@ app.use(
 			'Pragma',
 		],
 		credentials: true,
+		optionSuccessStatus: 200,
 	})
 );
 
