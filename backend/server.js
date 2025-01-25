@@ -30,14 +30,8 @@ mongoose
 app.use(
 	cors({
 		origin: '*',
-		methods: ['GET', 'POST', 'DELETE', 'PUT'],
-		allowedHeaders: [
-			'Content-Type',
-			'Authorization',
-			'Cache-Control',
-			'Expires',
-			'Pragma',
-		],
+		methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS', 'PATCH'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
 	})
 );
