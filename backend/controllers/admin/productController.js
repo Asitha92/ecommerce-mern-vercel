@@ -116,16 +116,6 @@ const editProduct = async (req, res) => {
 			}
 		});
 
-		// update product in database with edited values
-		// product.title = title || product.title;
-		// product.description = description || product.description;
-		// product.image = image || product.image;
-		// product.brand = brand || product.brand;
-		// product.category = category || product.category;
-		// product.price = price || product.price;
-		// product.salePrice = salePrice || product.salePrice;
-		// product.totalStock = totalStock || product.totalStock;
-
 		// save the updated product
 		await product.save();
 
