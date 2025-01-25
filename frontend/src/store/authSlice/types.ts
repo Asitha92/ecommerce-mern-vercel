@@ -1,6 +1,6 @@
 import { ADMIN_ROLE, USER_ROLE } from '@/constants';
 
-export type FormData = Record<string, string | null>;
+export type FormData = Record<string, string | null> | null;
 
 export interface User {
 	email: string;

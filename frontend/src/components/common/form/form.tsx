@@ -22,7 +22,7 @@ function CommonForm({
 }: FormProps) {
 	function renderInputsByComponentName(controlItem: FormControlProps) {
 		let controlElement = null;
-		const value = formData[controlItem.name] || '';
+		const value = (formData && formData[controlItem.name]) || '';
 		switch (controlItem.componentType) {
 			case 'input':
 				controlElement = (

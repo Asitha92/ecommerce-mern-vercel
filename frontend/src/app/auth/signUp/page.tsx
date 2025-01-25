@@ -18,7 +18,7 @@ const initialState: FormData = {
 };
 
 function SignUp() {
-	const [formData, setFormData] = useState<FormData>(initialState);
+	const [formData, setFormData] = useState<FormData | null>(initialState);
 	const dispatch = useDispatch<AppDispatch>();
 	const router = useRouter();
 	const { toast } = useToast();
