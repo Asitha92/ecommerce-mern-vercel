@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-	app.use('/api/auth', authRouter);
+	res.send('Hello, World!');
 });
 
 //  api routes
