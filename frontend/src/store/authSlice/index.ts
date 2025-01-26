@@ -7,6 +7,7 @@ const initialState: InitialState = {
 	isAuthenticated: false,
 	isLoading: true,
 	user: null,
+	token: null,
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -39,16 +40,31 @@ export const signInUser = createAsyncThunk(
 	}
 );
 
-export const checkAuth = createAsyncThunk(CHECK_AUTH, async () => {
-	const response = await axios.get(`${API_BASE_URL}/api/auth/checkAuth`, {
-		withCredentials: true,
-		headers: {
-			'Cache-Control': 'no-store, no-cache, must-revalidate proxy-revalidate',
-			Expires: '0',
-		},
-	});
-	return response.data;
-});
+// commented out due to deploying to vercel - vercel doesn't support public suffix - cookies
+// export const checkAuth = createAsyncThunk(CHECK_AUTH, async () => {
+// 	const response = await axios.get(`${API_BASE_URL}/api/auth/checkAuth`, {
+// 		withCredentials: true,
+// 		headers: {
+// 			'Cache-Control': 'no-store, no-cache, must-revalidate proxy-revalidate',
+// 			Expires: '0',
+// 		},
+// 	});
+// 	return response.data;
+// });
+
+export const checkAuth = createAsyncThunk(
+	CHECK_AUTH,
+	async (token: string | null) => {
+		const response = await axios.get(`${API_BASE_URL}/api/auth/checkAuth`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Cache-Control': 'no-store, no-cache, must-revalidate proxy-revalidate',
+				Expires: '0',
+			},
+		});
+		return response.data;
+	}
+);
 
 export const signOutUser = createAsyncThunk(SIGNOUT_URL, async () => {
 	const response = await axios.post(
@@ -67,6 +83,11 @@ const authSlice = createSlice({
 	reducers: {
 		setUser: (state, action) => {
 			state.user = action.payload;
+		},
+		resetTokenAndCredentials: (state) => {
+			state.isAuthenticated = false;
+			state.token = null;
+			state.user = null;
 		},
 	},
 	extraReducers: (builder) => {
@@ -91,11 +112,14 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.isAuthenticated = action.payload.success;
 				state.user = action.payload.success ? action.payload.user : null;
+				state.token = action.payload.token;
+				sessionStorage.setItem('token', JSON.stringify(action.payload.token));
 			})
 			.addCase(signInUser.rejected, (state) => {
 				state.isLoading = false;
 				state.isAuthenticated = false;
 				state.user = null;
+				state.token = null;
 			})
 			.addCase(checkAuth.pending, (state) => {
 				state.isLoading = true;
@@ -126,5 +150,5 @@ const authSlice = createSlice({
 	},
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, resetTokenAndCredentials } = authSlice.actions;
 export default authSlice.reducer; // export reducer to store.js

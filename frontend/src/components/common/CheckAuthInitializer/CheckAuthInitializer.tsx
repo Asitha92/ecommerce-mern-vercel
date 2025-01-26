@@ -8,7 +8,9 @@ const CheckAuthInitializer: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
-		dispatch(checkAuth());
+		const token = sessionStorage.getItem('token');
+		const parsedToken = token ? JSON.parse(token) : null;
+		dispatch(checkAuth(parsedToken));
 	}, [dispatch]);
 
 	return null; // This component doesn't render anything

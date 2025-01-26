@@ -26,7 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { shoppingViewHeaderMenuItems } from './config';
 import { MenuItemsProps } from './types';
 import { useRouter } from 'next/navigation';
-import { signOutUser } from '@/store/authSlice';
+import { resetTokenAndCredentials, signOutUser } from '@/store/authSlice';
 import UserCartWrapper from './cart-wrapper';
 import { logo } from '@/assets';
 import Image from 'next/image';
@@ -78,6 +78,8 @@ function HeaderRightContent() {
 
 	function handleLogout() {
 		dispatch(signOutUser());
+		dispatch(resetTokenAndCredentials());
+		sessionStorage.clear();
 	}
 
 	return (

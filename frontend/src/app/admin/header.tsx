@@ -5,13 +5,15 @@ import React from 'react';
 import { AdminHeaderProps } from './types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store/store';
-import { signOutUser } from '@/store/authSlice';
+import { resetTokenAndCredentials, signOutUser } from '@/store/authSlice';
 
 function AdminHeader({ setIsOpen }: AdminHeaderProps) {
 	const dispatch = useDispatch<AppDispatch>();
 
 	function handleSignOut() {
 		dispatch(signOutUser());
+		dispatch(resetTokenAndCredentials());
+		sessionStorage.clear();
 	}
 	return (
 		<header className="flex items-center justify-between px-4 py-3 bg-background border-b">

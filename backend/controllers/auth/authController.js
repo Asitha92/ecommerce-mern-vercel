@@ -69,10 +69,22 @@ const signInUser = async (req, res) => {
 			{ expiresIn: '60m' }
 		);
 
+		// commented out due to deploying to vercel - vercel doesn't support public suffix - cookies
 		// setup cookie and send response
-		res.cookie('token', token, { httpOnly: true, secure: false }).json({
+		// res.cookie('token', token, { httpOnly: true, secure: true }).json({
+		// 	success: true,
+		// 	message: 'User logged in successfully !',
+		// 	user: {
+		// 		email: checkUser.email,
+		// 		role: checkUser.role,
+		// 		id: checkUser._id,
+		// 		userName: checkUser.userName,
+		// 	},
+		// });
+		res.status(200).json({
 			success: true,
 			message: 'User logged in successfully !',
+			token,
 			user: {
 				email: checkUser.email,
 				role: checkUser.role,
@@ -97,9 +109,32 @@ const signOutUser = (req, res) => {
 	});
 };
 
-// auth middleware
+// auth middleware (commented out due to deploying to vercel - vercel doesn't support public suffix - cookies)
+// const authMiddleware = async (req, res, next) => {
+// 	const token = req.cookies.token;
+// 	if (!token) {
+// 		return res.status(401).json({
+// 			success: false,
+// 			message: 'Unauthorized user !',
+// 		});
+// 	}
+
+// 	try {
+// 		const decoded = jwt.verify(token, 'CLIENT_PRIVATE_KEY');
+// 		req.user = decoded;
+// 		next();
+// 	} catch (err) {
+// 		res.status(401).json({
+// 			success: false,
+// 			message: 'Unauthorized user !',
+// 		});
+// 	}
+// };
+
+// auth middleware - vercel supported
 const authMiddleware = async (req, res, next) => {
-	const token = req.cookies.token;
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
 	if (!token) {
 		return res.status(401).json({
 			success: false,

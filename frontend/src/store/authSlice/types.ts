@@ -13,4 +13,5 @@ export interface InitialState {
 	isLoading: boolean;
 	isAuthenticated: boolean;
 	user: User | null;
+	token: string | null;
 }
