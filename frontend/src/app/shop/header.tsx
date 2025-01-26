@@ -107,7 +107,7 @@ function HeaderRightContent() {
 
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Avatar className="bg-black">
+					<Avatar className="bg-black cursor-pointer">
 						<AvatarFallback className="bg-black text-white font-extrabold flex justify-center items-center w-10">
 							{user?.userName?.charAt(0) || '?'}
 						</AvatarFallback>
@@ -119,12 +119,18 @@ function HeaderRightContent() {
 				>
 					<DropdownMenuLabel>Logged in as {user?.userName}</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem onClick={() => router.push(SHOP_ACCOUNT_URL)}>
+					<DropdownMenuItem
+						className="cursor-pointer"
+						onClick={() => router.push(SHOP_ACCOUNT_URL)}
+					>
 						<UserCog className="mr-2 h-4 w-4" />
 						Account
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem onClick={handleLogout}>
+					<DropdownMenuItem
+						className="cursor-pointer"
+						onClick={handleLogout}
+					>
 						<LogOut className="mr-2 h-4 w-4" />
 						Logout
 					</DropdownMenuItem>
