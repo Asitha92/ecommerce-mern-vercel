@@ -26,6 +26,9 @@ const CheckAuthentication: React.FC<{ children: React.ReactNode }> = ({
 	);
 
 	useEffect(() => {
+		if (pathname === '/') {
+			console.log(pathname, 'pathname');
+		}
 		// Redirect if not authenticated and trying to access restricted pages
 		if (
 			!isAuthenticated &&
