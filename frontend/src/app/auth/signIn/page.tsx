@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import CommonForm from '@/components/common/form/form';
 import Link from 'next/link';
+import { ColorRing } from 'react-loader-spinner';
 
 const initialState: FormData = {
 	email: '',
@@ -19,21 +20,27 @@ function SignIn() {
 	const [formData, setFormData] = useState<FormData | null>(initialState);
 	const dispatch = useDispatch<AppDispatch>();
 	const { toast } = useToast();
+	const [isLoading, setIsLoading] = useState(false);
 
 	function onSubmit(event: FormEvent<HTMLFormElement>): void {
 		event.preventDefault();
-		dispatch(signInUser(formData)).then((data) => {
-			if (data?.payload?.success) {
-				toast({
-					title: data?.payload?.message,
-				});
-			} else {
-				toast({
-					title: data?.payload?.message,
-					variant: 'destructive',
-				});
-			}
-		});
+		setIsLoading(true);
+		dispatch(signInUser(formData))
+			.then((data) => {
+				if (data?.payload?.success) {
+					toast({
+						title: data?.payload?.message,
+					});
+				} else {
+					toast({
+						title: data?.payload?.message,
+						variant: 'destructive',
+					});
+				}
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}
 
 	return (
@@ -59,6 +66,19 @@ function SignIn() {
 				onSubmit={onSubmit}
 				setFormData={setFormData}
 			/>
+			{isLoading && (
+				<div className="fixed inset-0 z-[9999] bg-black bg-opacity-30 flex items-center justify-center">
+					<ColorRing
+						visible={true}
+						height="80"
+						width="80"
+						ariaLabel="color-ring-loading"
+						wrapperStyle={{}}
+						wrapperClass="color-ring-wrapper"
+						colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
