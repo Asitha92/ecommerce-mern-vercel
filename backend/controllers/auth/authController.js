@@ -15,7 +15,7 @@ const signUpUser = async (req, res) => {
 		// create hash password instead of password
 		const hashPassword = await bcrypt.hash(password, 12);
 		// create new user and assign new hash password to new user
-		const newUser = new User({ userName, email, password: hashPassword });
+		const newUser = new User({ userName, email, password: password });
 		// save new user to database
 		await newUser.save();
 		res
@@ -40,7 +40,7 @@ const signInUser = async (req, res) => {
 		if (!checkUser) {
 			return res.json({
 				success: false,
-				message: "User doesn't exists !. Please sign up first",
+				message: "User doesn't exists !. Please sign up first !",
 			});
 		}
 
@@ -51,9 +51,9 @@ const signInUser = async (req, res) => {
 		);
 
 		// check if passwords matched
-		if (!checkPasswordMatch) {
+		if (password !== checkUser.password) {
 			return res.json({
-				title: 'Invalid Password ! Please try again',
+				message: 'Invalid Password ! Please try again !',
 			});
 		}
 

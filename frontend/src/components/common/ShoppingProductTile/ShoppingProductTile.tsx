@@ -21,10 +21,10 @@ function ShoppingProductTile({
 							src={image}
 							alt={title || 'new product'}
 							width={350}
-							height={300}
+							height={350}
 							priority
-							className="object-cover rounded-t-lg p-2"
-							style={{ width: '100%', height: '350px' }}
+							className="object-cover rounded-t-lg p-2 aspect-auto"
+							style={{ width: '100%', height: '350px', overflow: 'auto' }}
 						/>
 					) : null}
 					{Number(totalStock) === 0 ? (
@@ -36,13 +36,13 @@ function ShoppingProductTile({
 							{`Only ${totalStock} items left`}
 						</Badge>
 					) : salePrice && Number(salePrice) > 0 ? (
-						<Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
+						<Badge className="absolute top-1 right-2 bg-red-500 hover:bg-red-600">
 							Sale
 						</Badge>
 					) : null}
 				</div>
 				<CardContent className="p-4">
-					<h2 className="text-xl font-bold mb-2">{title}</h2>
+					<h2 className="text-xl font-bold mb-2 line-clamp-2">{title}</h2>
 					<div className="flex justify-between items-center mb-2">
 						<p className="text-sm text-gray-600 font-semibold">
 							Brand:{' '}
@@ -58,7 +58,11 @@ function ShoppingProductTile({
 						{price ? (
 							<span
 								className={`text-xl font-bold mb-2 ${
-									salePrice && Number(salePrice) > 0 ? 'line-through' : ''
+									salePrice &&
+									Number(salePrice) > 0 &&
+									Number(salePrice) > Number(price)
+										? 'line-through'
+										: ''
 								}`}
 							>
 								{new Intl.NumberFormat('en-GB', {
@@ -67,7 +71,7 @@ function ShoppingProductTile({
 								}).format(Number(price))}
 							</span>
 						) : null}
-						{salePrice ? (
+						{salePrice && Number(salePrice) > Number(price) ? (
 							<span className="text-lg font-bold">
 								{new Intl.NumberFormat('en-GB', {
 									style: 'currency',

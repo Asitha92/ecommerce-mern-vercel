@@ -136,7 +136,14 @@ function ShoppingCheckout() {
 					<div className="mt-4 w-full">
 						<Button
 							onClick={handleInitiatePaypalPayment}
-							className="w-full"
+							className={`w-full ${
+								cart && cart.items && cart.items.length > 0
+									? 'cursor-pointer'
+									: 'cursor-not-allowed'
+							}`}
+							disabled={
+								cart && cart.items && cart.items.length > 0 ? false : true
+							}
 						>
 							{isPaymentStart
 								? 'Processing Paypal Payment...'

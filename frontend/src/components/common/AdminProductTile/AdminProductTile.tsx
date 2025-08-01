@@ -39,13 +39,13 @@ function AdminProductTile({
 							width={350}
 							height={300}
 							priority
-							className="object-cover rounded-t-lg p-2"
-							style={{ width: '100%', height: '350px' }}
+							className="object-cover rounded-t-lg p-2 aspect-auto"
+							style={{ width: '100%', height: '350px', overflow: 'auto' }}
 						/>
 					) : null}
 				</div>
 				<CardContent>
-					<h2 className="text-xl font-bold mb-2">{title}</h2>
+					<h2 className="text-xl font-bold mb-2 line-clamp-2">{title}</h2>
 					<div className="flex justify-between items-center mb-2">
 						{price ? (
 							<span
@@ -69,7 +69,9 @@ function AdminProductTile({
 						) : null}
 					</div>
 					<div>
-						<p className="text-sm text-gray-600">{description}</p>
+						<p className="text-sm text-gray-600 max-h-[200px] overflow-auto">
+							{description}
+						</p>
 						<div className="flex justify-between mt-2">
 							<p className="text-sm text-gray-600 font-semibold">
 								Brand: {brand}

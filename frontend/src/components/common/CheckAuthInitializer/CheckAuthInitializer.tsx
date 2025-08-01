@@ -8,8 +8,16 @@ const CheckAuthInitializer: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
-		const token = sessionStorage.getItem('token');
-		const parsedToken = token ? JSON.parse(token) : null;
+		const tokenString = sessionStorage.getItem('token');
+		let parsedToken = null;
+
+		try {
+			if (tokenString && tokenString !== 'undefined') {
+				parsedToken = JSON.parse(tokenString);
+			}
+		} catch (error) {
+			console.error('Failed to parse token:', error);
+		}
 		dispatch(checkAuth(parsedToken));
 	}, [dispatch]);
 

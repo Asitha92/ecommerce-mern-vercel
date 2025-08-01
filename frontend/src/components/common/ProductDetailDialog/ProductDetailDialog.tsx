@@ -130,7 +130,7 @@ function ProductDetailDialog({
 		>
 			<DialogOverlay className="backdrop-blur-sm" />
 			<DialogContent
-				className="lg:grid-cols-2 gap-8 sm:p-12 max-w-[90vw] lg:max-w-[70vw] h-fit rounded-lg"
+				className="lg:grid-cols-2 gap-8 sm:p-12 max-w-[90vw] lg:max-w-[70vw] max-h-screen overflow-y-auto h-fit rounded-lg"
 				aria-describedby={undefined}
 			>
 				<div className="relative overflow-hidden rounded-lg">
@@ -141,7 +141,7 @@ function ProductDetailDialog({
 							width={350}
 							height={300}
 							priority
-							className="object-cover rounded-lg aspect-square"
+							className="object-cover rounded-lg aspect-auto"
 							style={{ width: '100%', borderRadius: '8px' }}
 						/>
 					) : null}
@@ -152,7 +152,7 @@ function ProductDetailDialog({
 							<span className="text-3xl font-extrabold">{product?.title}</span>
 						</DialogTitle>
 
-						<p className="text-muted-foreground  mb-5">
+						<p className="text-muted-foreground mb-5 max-h-[150px] overflow-auto">
 							{product?.description}
 						</p>
 					</div>
