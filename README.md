@@ -1,50 +1,53 @@
-# E-Commerce
+# E-Commerce MERN Application
 
-A full-stack e-commerce web application built with user and admin frontends using Node.js, Express, MongoDB, and React.
+A full-stack e-commerce web application with user and admin panels, built using the MERN stack (MongoDB, Express, React, Node.js) and deployed on Vercel.
 
 Please have look at live application
 [https://ecommerce-mern-vercel-self.vercel.app](https://ecommerce-mern-vercel-self.vercel.app/auth/signIn)
-Please sign up to use application(for now just use dummy data).
+*Please sign up using dummy data to explore the application.*
 
-![image alt]()
-![image alt]()
-![image alt]()
-![image alt]()
-![image alt]()
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/0.png?raw=true)
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/1.png?raw=true)
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/2.png?raw=true)
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/3.png?raw=true)
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/4.png?raw=true)
+![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/5.png?raw=true)
 
 ## Features ✨
-- **Workflow Management**: Create, organize, and track workflows
-- **User Authentication**: Secure sign-in/sign-up with JWT
-- **RESTful API**: Node.js backend with Express
-- **Database**: MongoDB with Mongoose ODM
-- **Deployment**: Vercel deployment
+- 🛒 **Product Listing & Details**
+- 👤 **User Authentication (JWT-based)**
+- 🛍️ **Shopping Cart & Checkout**
+- 📦 **Order Management**
+- 🧑‍💼 **Admin Panel for Managing Products & Orders**
+- 🧮 **Quantity & Stock Handling**
+- ☁️ **Deployed on Vercel (Frontend & Backend)**
 
 ## Tech Stack
-### Frontend
+### 🖥️ Frontend
 - React.js
 - TypeScript
 - Tailwind CSS
 - React Router
-- Axios for API calls
-- React flow
+- Axios
 
-### Backend
+### 🗄️ Backend
 - Node.js
 - Express.js
 - MongoDB (Mongoose)
 - JWT Authentication
-- CORS enabled for cross-origin requests
+- CORS
 
-## Prerequisites 
-- Node.js (v16+ recommended)
+## 📦 Prerequisites
+- Node.js (v16+)
 - npm
-- MongoDB Atlas account or local MongoDB instance
+- MongoDB Atlas or local MongoDB instance
 - Vercel account (for deployment)
 
-## Installation 
+## 🚀 Getting Started
+
 ### 1. Clone the repository
-git clone https://github.com/Asitha92/NodePilot.git
-cd NodePilot
+git clone https://github.com/Asitha92/ecommerce-mern-vercel.git
+cd ecommerce-mern-vercel
 cd frontend - for frontend
 cd backend - for backend
 
@@ -57,13 +60,19 @@ backend > npm run dev
 
 ## Set up environment variables
 ### for backend
+CLOUDINARY_API_KEY=cloudinary api key
+CLOUDINARY_API_SECRET=cloudinary api secret
+CLOUDINARY_CLOUD_NAME=cloudinary cloud name
+
+PAYPAL_CLIENT_ID=paypal id
+PAYPAL_CLIENT_SECRET=paypal secret
+
 MONGODB_URI=your_mongodb_connection_string
-OPENROUTER_API_KEY=your openrouter api key(this is free and unlimited)
-CLIENT_BASE_URL=client url
-PORT=port you are using
+CLIENT_BASE_URL=http://localhost:3000
+PORT=5001
 
 ### frontend
-VITE_CLIENT_BASE_URL=backend api url
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
 
 ## Vercel deployment
 ### Frontend
@@ -79,24 +88,6 @@ VITE_CLIENT_BASE_URL=backend api url
 2. Select name, framework(Node) and press Edit and choose backend
 3. Add environment variables(important: in backend you must add frontend vercel domain url)
 4. Deploy
-
-## Project Structure
-
-![iamge alt](https://github.com/Asitha92/NodePilot/blob/fe69d5b2b52676cbfe36b1e176c5fd465349f224/6.png)
-
-## API endpoints
-
-### Authentication
-POST /auth/signIn - User login
-POST /auth/signUp - User registration
-POST /auth/signOut - User logout
-
-### Workflows
-GET /workflow - Get all workflows
-POST /workflow - Create new workflow
-GET /workflow/:id - Get selected workflow
-DELETE /workflow/delete/:id - Delete workflow
-POST /workflow/generate - Create AI response
 
 ## Contributing
 
