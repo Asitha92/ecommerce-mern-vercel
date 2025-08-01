@@ -60,16 +60,16 @@ backend > npm run dev
 
 ## Set up environment variables
 ### for backend
-CLOUDINARY_API_KEY=cloudinary api key
-CLOUDINARY_API_SECRET=cloudinary api secret
-CLOUDINARY_CLOUD_NAME=cloudinary cloud name
+-CLOUDINARY_API_KEY=cloudinary api key
+-CLOUDINARY_API_SECRET=cloudinary api secret
+-CLOUDINARY_CLOUD_NAME=cloudinary cloud name
 
-PAYPAL_CLIENT_ID=paypal id
-PAYPAL_CLIENT_SECRET=paypal secret
+-PAYPAL_CLIENT_ID=paypal id
+-PAYPAL_CLIENT_SECRET=paypal secret
 
-MONGODB_URI=your_mongodb_connection_string
-CLIENT_BASE_URL=http://localhost:3000
-PORT=5001
+-MONGODB_URI=your_mongodb_connection_string
+-CLIENT_BASE_URL=http://localhost:3000
+-PORT=5001
 
 ### frontend
 NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
@@ -91,9 +91,9 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
 
 ## Contributing
 
-Contributions are welcome! Please follow these steps:
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+-Contributions are welcome! Please follow these steps:
+-Fork the repository
+-Create your feature branch (git checkout -b feature/AmazingFeature)
+-Commit your changes (git commit -m 'Add some AmazingFeature')
+-Push to the branch (git push origin feature/AmazingFeature)
+-Open a Pull Request
