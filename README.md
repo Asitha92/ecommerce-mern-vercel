@@ -4,7 +4,7 @@ A full-stack e-commerce web application with user and admin panels, built using 
 
 Please have look at live application
 [https://ecommerce-mern-vercel-self.vercel.app](https://ecommerce-mern-vercel-self.vercel.app/auth/signIn)
-*Please sign up using dummy data to explore the application.*
+- *Please sign up using dummy data to explore the application.*
 
 ![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/0.png?raw=true)
 ![image alt](https://github.com/Asitha92/ecommerce-mern-vercel/blob/main/1.png?raw=true)
@@ -72,7 +72,7 @@ backend > npm run dev
 - PORT=5001
 
 ### frontend
-NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
+- NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
 
 ## Vercel deployment
 ### Frontend
